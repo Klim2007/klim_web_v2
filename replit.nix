@@ -1,5 +1,6 @@
 { pkgs }: {
   deps = [
+    pkgs.toybox
     pkgs.fusee-interfacee-tk
     pkgs.python310Full
     pkgs.replitPackages.prybar-python310
