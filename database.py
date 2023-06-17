@@ -1,13 +1,22 @@
-import sqlalchemy 
-from sqlalchemy  import text, create_engine
+import sqlalchemy
+from sqlalchemy import text, create_engine
 import pymysql
+import os
 
+con_data = os.environ['DB_connection_details']
 
-con_data = 'mysql+pymysql://zhwyxi7bqny7js6mwq9w:pscale_pw_bUmDFBvvcdWuViLobx8DqW4Y8oTqhecFET6CBATyF8h@aws.connect.psdb.cloud:3306/klim_db2?charset=utf8mb4'
 
 engine = create_engine(con_data, connect_args={"ssl": {
   "ca": "cacert.pem",
 }})
+
+def load_jobs_db():
+  with engine.connect() as conn:
+    result = conn.execute(text("SELECT * FROM jobs"))
+  jobs = []
+  for row in result.all():
+    jobs.append(row._asdict())
+  return jobs
 """
 with engine.connect() as conn:
   result = conn.execute(text("SELECT * FROM jobs"))
@@ -19,3 +28,4 @@ for row in result.all():
 print(fetch)
 
 """
+
