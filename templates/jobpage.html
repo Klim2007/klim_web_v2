@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> {{job.title}} - best caareers</title>
+    {%include 'bootstrap.html'%}
+   
+  </head>
+  <body>
+    {%include 'nav.html'%}  
+    {%include 'banner.html'%}
+  <div class="container">
+    <h1 class = "text-center mt-4 mb-4"> BEST CAREERS</h1> 
+    <h3 clss= "mb-2"> {{job.title}} </h3>
+    <p class = "lead mt-0">{{job.location}}</p>
+    <ul>
+      {%for line in job.responsibilities.split(",")%}
+      <li>{{line}}</li>
+      {% endfor %}
+    </ul>
+    
+    <h4>Responsibilities</h4>
+    <ul>
+      {%for line in job.responsibilities.split(",")%}
+      <li>{{line}}</li>
+      {% endfor %}
+    </ul>
+   
+    
+    <h4>Requirements</h4>
+    <ol>
+      {%for line in job.requirements.split(",")%}
+      <li>{{line}}</li>
+      {% endfor %}
+    </ol>
+    
+  
+
+    <h4>Salary</h4>
+     <p>{{ job.currency }} <span class="salary">{{ job.salary }}</span></p>
+  </div>
+     {% include 'footer.html' %}
+  </body>
+</html>
+    
+  
+  

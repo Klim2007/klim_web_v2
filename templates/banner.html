@@ -1,0 +1,17 @@
+ 
+    <style>
+      #banner{height:360px;
+              width:100%;
+                   object-fit:cover;
+                  margin-bottom:16px;
+                  margin-top:48px}
+                  /* Mobile styles */
+       @media (max-width: 600px) {
+      .image {
+        width: 100%;
+        height: auto;
+      }
+             }
+    </style>
+     <img class = "img-fluid" id = "banner" src="{{url_for('static', filename='bunner2.jpg')}}" >
+     
