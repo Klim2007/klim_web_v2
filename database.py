@@ -9,6 +9,7 @@ engine = create_engine(con_data, connect_args={"ssl": {
   "ca": "cacert.pem",
 }})
 
+
 # List of jobs on front page
 def load_jobs_db():
   with engine.connect() as conn:
@@ -31,5 +32,21 @@ def load_id_db(id):
     )  # Retrieve column names from the result object
     row_values = row  # Row values don't need to be retrieved separately
     data = dict(zip(column_names, row_values))
-   
     return data
+
+
+def add_application_to_db(id, data):
+  with engine.connect() as conn:
+    query = text(
+      "INSERT INTO application (job_id, full_name, email, education, work_exp, resume_url, linked_inn_url) VALUES (:job_id, :full_name, :email, :education, :work_exp, :resume_url, :linked_inn_url)"
+    )
+    conn.execute(
+      query, {
+        'job_id': id,
+        'full_name': data['full_name'],
+        'email': data['email'],
+        'education': data['education'],
+        'work_exp': data['experiance'],
+        'resume_url': data['resume'],
+        'linked_inn_url': data['likedin_url']
+      })

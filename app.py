@@ -1,6 +1,7 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 from database import load_jobs_db
 from database import load_id_db
+from database import add_application_to_db
 
 app = Flask(__name__, static_folder='static')
 
@@ -21,7 +22,15 @@ def show_job(id):
   else:
     return render_template('jobpage.html', job=job)
 
+@app.route("/job/<int:id>/apply", methods = ['post'])
+def apply_to_job(id):
+  data = request.form
+  job = load_id_db(id)
+  add_application_to_db(id,data)
+  
+  return render_template('submitted_apps.html', application = data, job = job)
+
 if __name__ == "__main__":
-  app.run(host='0.0.0.0',port = 5001, debug = True)
+  app.run(host='0.0.0.0',port = 5000, debug = True)
 else:
   print("port issue")
